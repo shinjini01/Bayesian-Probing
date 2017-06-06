@@ -13,9 +13,6 @@ r.mat = [a1, 1 - a1, a2, 1 - a2, a4, a5]; % r.mat is the result matrix
 
 
 for k = 1:size(t,2)
-    for i = 1:size(r.mat,1)
-P = update_probability(t(:,k), P, r.mat(:,k))
+    P = update_probability(t(:,k), P, r.mat(:,k))
     end
-    
-end
     
