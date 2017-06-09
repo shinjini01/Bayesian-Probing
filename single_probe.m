@@ -6,10 +6,10 @@ tau = find(sum(Q, 1) == delta_U, 1 ); %find minimum index with maximum value
 a = 1:n; tau0 = tau;
 
    
-while(length(a) ~= 0)
+while(~isempty(a))
     a = find(1:n ~= tau0);
     for j = a
-        b = (length(tau0)+1)*sum( prod(Q(:,tau0)).*Q(:,j))
+        b = (length(tau0)+1)*sum( prod(Q(:,tau0),2).*Q(:,j));
         if(b >= delta_U)
             delta_U = b;
             tau = sort([tau, j]);
@@ -18,7 +18,7 @@ while(length(a) ~= 0)
     if(tau == tau0)
         break;
     else
-    tau0 = tau
+    tau0 = tau;
     end
     
 end
