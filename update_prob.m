@@ -12,18 +12,26 @@ r.mat = [a1, 1 - a1, a2, 1 - a2, a4, a5]; % r.mat is the result matrix
 
 
 
-for k = 1:size(t,2)
-    P = update_probability(t(:,k), P, r.mat(:,k))
-    end
+for k = 1:size(t,2)    
+P = update_probability(t(:,k), P, r.mat(:,k))  
+    
+end
+    
 %% Generalize the Algorithm %%
-%% Assume the S matrix is totally unknown, 
+
  % We begin with P matrix with identical elements 1/min(m, n) 
- m = 8; n = 8;
- P = ones(m,n)/min(m,n); S = ones(m,n); Q = 1 - P; 
+
+  S = diag(ones(4,1)); S(:,4) = 1; S(4,:) = 1; 
+ load cage4.mat
+ mat = full(Problem.A); S = abs(sign(mat))
+ [m,n] = size(S)
+ P = ones(m,n)/min(m,n); n_itr =0;
+ while( sum(sum(0<P<1)) ~=sum(sum(0<S<1)))
  t = zeros(n,1); 
  t(single_probe(P,n)) = 1
  r = zeros(n,1); r(find(S * t)) = 1;
  P = update_probability(t, P, r)
- S(P == 0) = 0; 
-     
+ n_itr = n_itr+1;
+ end
+ 
  
