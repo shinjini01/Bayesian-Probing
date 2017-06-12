@@ -25,13 +25,10 @@ end
  load cage4.mat
  mat = full(Problem.A); S = abs(sign(mat))
  [m,n] = size(S)
- P = ones(m,n)/min(m,n); n_itr =0;
+ P = ones(m,n)/min(m,n) + 0.001*randn(size(S)); n_itr =0;
  while( sum(sum(0<P<1)) ~=sum(sum(0<S<1)))
  t = zeros(n,1); 
  t(single_probe(P,n)) = 1
  r = zeros(n,1); r(find(S * t)) = 1;
  P = update_probability(t, P, r)
- n_itr = n_itr+1;
  end
- 
- 
