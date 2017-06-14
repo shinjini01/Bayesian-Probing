@@ -37,7 +37,7 @@ n_itr =0;                 % Counter for the number of iterations
              end
          end
      end
-     P_prime
+     
      
      % Remove the fully identified columns from the probability matrix
      % before the next iteration
@@ -46,6 +46,7 @@ n_itr =0;                 % Counter for the number of iterations
      % Remove the corresponding columns from the sparsity matrix
      S_prime = S_prime(:,col_indices(col_indices>0));
      
-     n_itr = n_itr+1
+     n_itr = n_itr+1;
  end
- 
+ P_prime
+ n_itr
