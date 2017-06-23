@@ -20,7 +20,7 @@ P_prime = zeros(m_s,n_s);
 n_itr =0;                 % Counter for the number of iterations
 
 
- while( sum(sum(0<P<1)) ~=sum(sum(0<S_prime<1)))
+ while( sum(and(0 < P, P <1)) ~= sum(and(0<S_prime, S_prime<1)))
      [m,n] = size(P); 
      t = zeros(n,1);
      t(single_probe3(P,m,n)) = 1;
