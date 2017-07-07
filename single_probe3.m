@@ -1,4 +1,4 @@
-%% Function to find single best probe as in section 3.3
+                                                                %% Function to find single best probe as in section 3.3
 function tau = single_probe3(prob_matrix,m, n)
 Q = 1 - prob_matrix; 
 delta_U = max(sum(Q,1)); % delta_U(P,tau) as defined in eq. 14, section 2.5
