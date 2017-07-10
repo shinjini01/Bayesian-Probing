@@ -13,10 +13,11 @@ while(~isempty(indices))
     
     for j = 1:length(indices)
         columns = nchoosek(indices, j); %matrix of column index combinations
-        for k = size(columns, 1):1
+        delta_U_k = 0;indices_i0 = 0;
+        for k = 1:size(columns, 1)
             indices_k = columns(k,:);
-            indices_i0 = 0;
-            delta_U_k = 0;
+            
+            delta_U_i_k = 0;tau_i = 0;
             % recalculating delta_U for additional columns
             for i = 1:m
                 
@@ -24,17 +25,17 @@ while(~isempty(indices))
                 tau_i = tau(Q(i, tau) <1);
                 
                 
-                delta_U_i_k = (length(tau_i)+length(indices_i))*sum( prod(Q(i,tau_i),2)*prod(Q(i,indices_i),2));
+                delta_U_i_k = delta_U_i_k + (length(tau_i)+length(indices_i))*sum( prod(Q(i,tau_i),2)*prod(Q(i,indices_i),2));
+            end
                 if(delta_U_i_k > delta_U_k)
                     delta_U_k = delta_U_i_k;
                     indices_i0 = unique(sort(horzcat(tau_i, columns(k,:))));
                 end
             end
-            delta_U_i(j) = delta_U_i(j) + delta_U_k;
+            delta_U_i(j) = delta_U_k;
             indices_U_i{j} = indices_i0;
         end
-    end
-    
+        
     % extending/modifying tau, i.e., support of the probe vector on the
     % basis of changes in delta_U
     if(max(delta_U_i) > delta_U)
@@ -49,4 +50,3 @@ end
 
 
 end
-
