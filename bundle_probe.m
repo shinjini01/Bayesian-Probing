@@ -49,3 +49,41 @@ while( sum(and(0 < P, P <1)) ~= sum(and(0<S_prime, S_prime<1)))
     
     n_itr2= n_itr2+1;
 end
+
+%% My METHOD %%
+S = diag(ones(60,1));    % Diagonal structure
+S(:,6) = 1; S(6,:) = 1;
+S_prime = S;
+[m_s, n_s] = size(S);     % Size of the sparse matrix
+K = 3; batch_size = round(n_s/K);
+P = diag(sum(S,2)/n_s)*ones(m_s, n_s);
+P_prime2 = zeros(m_s, n_s);
+n_itr3 = 0;
+while( sum(and(0 < P, P <1)) ~= sum(and(0<S_prime, S_prime<1)))
+    
+    [m_p, n_p] = size(P);
+    probe_mat = cluster_probe(P, n_p, min(K, n_p));
+    r_mat = zeros(m_p, K);
+    indices = NaN(1,n_p); ind = 1:n_p;
+    r_mat(find(S_prime * probe_mat)) = 1;
+    P = update_probability_bundle(probe_mat, P, r_mat);
+    
+    for i = 1:n_p
+        for j = 1:n_s
+            if(sum(abs(P(:,i)-S(:,j))< 0.0000000000001) == m_p)
+                indices(i) = i;
+                P_prime2(:,j) = P(:,i);
+            end
+        end
+    end
+    % P_prime2
+    
+    % Remove the fully identified columns from the probability matrix
+    % before the next iteration
+    col_indices = (1:n_p).*(isnan(indices));
+    P = P(:,col_indices(col_indices>0));
+    % Remove the corresponding columns from the sparsity matrix
+    S_prime = S_prime(:,col_indices(col_indices>0));
+    
+    n_itr3= n_itr3+1;
+end
