@@ -14,7 +14,7 @@ tau = zeros(batch_size, K);
 [~, I] =  sort(col_sums, 'descend');
 tau(1,(1:min(n,K))) = I(1:min(n,K)); % First element in each group selected
 
-indices(nonzeros(tau(1,:))) = [];
+indices(nonzeros(tau(1,:))) = [];    % Column indices not included in the first set 
 delta_U = col_sums(nonzeros(tau(1,:)));
 
 for i = 1:(batch_size - 1)
@@ -42,6 +42,3 @@ end
 
 
 end
-
-
-
