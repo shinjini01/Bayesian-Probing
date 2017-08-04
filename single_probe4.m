@@ -1,6 +1,6 @@
 %% Function to find single best probe as in section 3.3
 function tau = single_probe4(P, n)
-Q = single(1 - P) ;
+Q = 1 - P ;
 
 
 
@@ -34,7 +34,7 @@ while(~isempty(indices))
     end
     
     if(delta_U_k > delta_U)
-        delta_U = delta_U_k;
+        delta_U = delta_U_k
         tau = indices_i0;
     else
             break
@@ -44,3 +44,4 @@ while(~isempty(indices))
 end
 
 end
+
