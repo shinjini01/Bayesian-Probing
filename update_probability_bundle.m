@@ -3,7 +3,7 @@
 %  result_mat is a matrix of the r values where each row corresponds to a
 %  row of S multiplied with each of the probes in the probe_mat. 
 %  Order: m x K
-%  Prob_matrix is the matrix of probabilities
+%  P is the matrix of probabilities
 
 function P_mat = update_probability_bundle(probe_mat, P, r_mat)
 Q = 1 - P; tau = cell(1, size(probe_mat,2));
@@ -17,10 +17,7 @@ for i = 1: (size(P, 1)) %Taking one row of probability matrix
     for j = 1:size(probe_mat,2)
         w(j) = prod(Q(i,tau{j})); % Calculate w_i values as in eq 12, section 2.5
         
-        
-        %     result_0 = find(result_vec == 0);
-        %     result_1 = find(result_vec == 1);
-        
+       
         % Update the probability values as in eq. 15, section 2.5
         for k = tau{j}
             if(result_vec(j) == 1)
