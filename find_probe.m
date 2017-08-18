@@ -9,7 +9,7 @@ while( sum(sum(and(0 < P, P <1))) ~= sum(sum(and(0<S, S<1))))
     [m, n ] = size(P); indices = NaN(1,n);
     probe_mat = zeros(n, 1);r_mat = zeros(m, 1);
     
-    tau = single_probe4(P);
+    tau = single_probe(P);
     probe_mat(tau(1:length(tau)),:) = 1;
     
     
