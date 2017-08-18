@@ -8,3 +8,5 @@ find_probe.m calls functions single_probe.m to determine the support of the sing
 batch_probing_methods.m implements the batch probing mehods. The method suggested by Griewank and Mitev calls functions single_probe.m and update_probability_bundle.m iteratively till the complete sparsity pattern is determined. Our method calls functions batch_probe2.m and update_probability_bundle.m iteratively till the same convergence of P and S.
 
 single_probe_tests.m is used to do all the simulations to show the effect of different choices of initial P matrix on the number of sigle probes required to determine the entire sparsity pattern in different sparse matrices. The results are summarized in section 1.4 of the report.
+
+can96.mat and ibm32.mat are sparse matrices used besides the regular sparse patterns like diagonal matrices and arrow headed matrices, to demonstrate the functionality of our probing methods.
