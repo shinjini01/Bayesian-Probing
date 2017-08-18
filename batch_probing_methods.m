@@ -21,7 +21,7 @@ while( sum(sum(and(0 < P, P <1))) ~= sum(sum(and(0<S_prime, S_prime<1))))
     
     for i = 1:K
         [m,n] = size(P_prime);
-        tau = single_probe4(P_prime,n);
+        tau = single_probe(P_prime,n);
         probe_mat(tau(1:min(size(tau,2),probe_size)),i) = 1;        
         P_prime(:,tau(1:min(size(tau,2),probe_size)))= ones(m,min(size(tau,2),probe_size));        
         
